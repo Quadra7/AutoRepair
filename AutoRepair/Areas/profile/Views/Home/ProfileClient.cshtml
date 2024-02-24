@@ -1,0 +1,191 @@
+﻿@model AutoRepair.Areas.profile.Models.ClientViewModel
+@{
+    ViewData["Title"] = "Client`s profile";
+}
+
+
+<section>
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <img src="~/assets/client.png"
+                             alt="avatar"
+                             class="rounded-circle img-fluid"
+                             style="width: 150px;">
+                        <h5 class="my-3">@Html.DisplayFor(model => model.FirstName)</h5>
+                        <p class="text-muted mb-1">Client</p>
+                        <div class="d-flex justify-content-center mb-2">
+                            <a asp-area="user" asp-controller="Home" asp-action="Logout" type="button" class="btn btn-primary">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Last Name</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">@Html.DisplayFor(model => model.LastName)</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">First Name</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">@Html.DisplayFor(model => model.FirstName)</p>
+                            </div>
+                        </div>
+                        <hr>
+                        @if (Model.MiddleName != null)
+                        {
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Middle Name</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">@Html.DisplayFor(model => model.MiddleName)</p>
+                                </div>
+                            </div>
+                            <hr>
+                        }
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Phone Number</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">@Html.DisplayFor(model => model.PhoneNumber)</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Address</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">@Html.DisplayFor(model => model.Address)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header">
+                <h4 class="text-center text-muted mb-0">My Cars</h4>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="text-muted mb-0">
+                                Name
+                            </th>
+                            <th class="text-muted mb-0">
+                                Color
+                            </th>
+                            <th class="text-muted mb-0">
+                                License Plate
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="carTable">
+                        @foreach (var item2 in Model.Cars)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item2.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item2.Color)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item2.LicensePlate)
+                                </td>
+                                <td>
+                                    <a id="editLink" class="btn btn-light btn-outline-secondary" asp-area="profile" asp-controller="Car" asp-action="Edit" asp-route-id="@item2.ID">Edit</a>
+                                    <a id="deleteLink" class="btn btn-outline-danger" asp-area="profile" asp-controller="Car" asp-action="Delete" asp-route-id="@item2.ID">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <button id="btCars" value="0" class="btn btn-outline-primary" onclick="GetCars('@Model.ID')">Archieved Cars</button>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header">
+                <h4 class="text-center text-muted mb-0">My Orders</h4>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="text-muted mb-0">
+                                Car
+                            </th>
+                            <th class="text-muted mb-0">
+                                Master
+                            </th>
+                            <th class="text-muted mb-0">
+                                Service
+                            </th>
+                            <th class="text-muted mb-0">
+                                Price
+                            </th>
+                            <th class="text-muted mb-0">
+                                Status
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item2 in Model.Orders)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item2.Car.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item2.Master.Info.LastName)
+
+                                    @Html.DisplayFor(modelItem => item2.Master.Info.FirstName[0])
+
+                                    @Html.DisplayFor(modelItem => item2.Master.Info.MiddleName[0])
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item2.Service.Name)
+                                </td>
+                                <td>
+                                    @{
+                                        var price = Model.isInLoyalProgram ? item2.Service.Price / 100 * 80 : item2.Service.Price;
+                                    }
+                                     @Html.DisplayFor(modelItem => price) rub.
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item2.Status.Name)
+                                </td>
+                                <td>
+                                    <a class="btn btn-light btn-outline-secondary" asp-area="profile" asp-controller="Order" asp-action="Details" asp-route-id="@item2.ID">Details</a>
+                                    @if (item2.Status.Name == "Rejected")
+                                    {
+                                        <a class="btn btn-outline-danger" asp-area="profile" asp-controller="Order" asp-action="Delete" asp-route-id="@item2.ID">Delete</a>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>

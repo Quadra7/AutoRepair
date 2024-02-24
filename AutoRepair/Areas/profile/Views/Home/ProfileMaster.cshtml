@@ -1,0 +1,155 @@
+﻿@model AutoRepair.Areas.profile.Models.MasterViewModel
+
+@{
+    ViewData["Title"] = "Master`s profile";
+}
+
+<section>
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <img src="~/assets/master.png"
+                             alt="avatar"
+                             class="rounded-circle img-fluid"
+                             style="width: 150px;">
+                        <h5 class="my-3">Master</h5>
+                        <div class="d-flex justify-content-center mb-2">
+                            <a asp-area="user" asp-controller="Home" asp-action="Logout" type="button" class="btn btn-primary">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-8">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Last Name</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">@Html.DisplayFor(model => model.LastName)</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">First Name</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">@Html.DisplayFor(model => model.FirstName)</p>
+                            </div>
+                        </div>
+                        <hr>
+                        @if (Model.MiddleName != null)
+                        {
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">First Name</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">@Html.DisplayFor(model => model.MiddleName)</p>
+                                </div>
+                            </div>
+                            <hr>
+                        }
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Phone Number</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">@Html.DisplayFor(model => model.PhoneNumber)</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Address</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">@Html.DisplayFor(model => model.Address)</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Balance</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">@Html.DisplayFor(model => model.Balance)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @if (Model.Orders.Count() != 0)
+            {
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h4 class="text-center text-muted mb-0">New Orders!</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="text-muted mb-0">
+                                        Client
+                                    </th>
+                                    <th class="text-muted mb-0">
+                                        Car
+                                    </th>
+                                    <th class="text-muted mb-0">
+                                        Service
+                                    </th>
+                                    <th class="text-muted mb-0">
+                                        Price
+                                    </th>
+                                    <th class="text-muted mb-0">
+                                        Date
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item2 in Model.Orders)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item2.Client.Info.LastName)
+
+                                            @Html.DisplayFor(modelItem => item2.Client.Info.FirstName[0])
+
+                                            @Html.DisplayFor(modelItem => item2.Client.Info.MiddleName[0])
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item2.Car.Name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item2.Service.Name)
+                                        </td>
+                                        <td>
+                                            @{
+                                                var price = item2.Client.isInLoyalProgram ? item2.Service.Price / 100 * 80 : item2.Service.Price;
+                                            }
+                                            @Html.DisplayFor(modelItem => price) rub.
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item2.Date)
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-outline-success" asp-area="profile" asp-controller="Order" asp-action="Accept" asp-route-id="@item2.ID">Accept</a>
+                                            <a class="btn btn-outline-danger" asp-area="profile" asp-controller="Order" asp-action="Reject" asp-route-id="@item2.ID">Reject</a>
+                                            <a class="btn btn-light btn-outline-secondary" asp-area="profile" asp-controller="Order" asp-action="Details" asp-route-id="@item2.ID">Details</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

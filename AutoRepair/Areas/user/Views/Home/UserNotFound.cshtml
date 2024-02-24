@@ -1,0 +1,18 @@
+﻿@{
+    ViewData["Title"] = "User not found";
+}
+
+<main class="notfound w-auto m-auto">
+    <h1 class="h3 mb-3 fw-normal">User not found!</h1>
+    <h2 class="h4 mb-4 fw-normal">Check if the data entered is correct or register.</h2>
+    <hr />
+    <div class="form-floating">
+        <a asp-area="user" asp-controller="Home" asp-action="Login" type="button" class="btn btn-primary">Sign In</a>
+    </div>
+    <div class="form-floating">
+        <a asp-area="user" asp-controller="Register" asp-action="Index" type="button" class="btn btn-primary">Sign Up</a>
+    </div>
+    <div class="form-floating btn-home">
+        <a asp-area="" asp-controller="Home" asp-action="Index" type="button" class="btn btn-secondary btn-sm">Home</a>
+    </div>
+</main>

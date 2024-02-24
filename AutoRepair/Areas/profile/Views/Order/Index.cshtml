@@ -1,0 +1,68 @@
+﻿@model IEnumerable<AutoRepair.Data.Entities.OrderModel>
+
+@{
+    ViewData["Title"] = "Orders";
+}
+
+<h1>Accepted Orders</h1>
+
+<a asp-area="profile" asp-controller="Home" asp-action="Index">Back</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Client)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Car)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Service)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Client.Info.LastName)
+
+                    @Html.DisplayFor(modelItem => item.Client.Info.FirstName[0])
+
+                    @Html.DisplayFor(modelItem => item.Client.Info.MiddleName[0])
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Car.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Service.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status.Name)
+                </td>
+                <td>
+                    @if (item.Status.Name == "Accepted!")
+                    {
+                        <a class="btn btn-outline-success" onclick="ChangeOrderStatus('start','@item.ID')">Start Repairing</a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-outline-warning" onclick="ChangeOrderStatus('finish','@item.ID')">Finish Repairing</a>
+                    }
+                    <a asp-area="profile" asp-controller="Order" asp-action="Reject" asp-route-ID="@item.ID" class="btn btn-outline-danger">Reject</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

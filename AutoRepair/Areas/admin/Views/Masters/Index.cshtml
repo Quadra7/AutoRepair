@@ -1,0 +1,63 @@
+﻿@model IEnumerable<AutoRepair.Data.Entities.MasterModel>
+
+@{
+    ViewData["Title"] = "Masters";
+}
+
+<h1>Masters</h1>
+
+<p>
+    <a asp-action="Add">Add Master</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Phone Number
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Info.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Specialty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Balance)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Info.LastName)
+
+                    @Html.DisplayFor(modelItem => item.Info.FirstName[0])
+
+                    @Html.DisplayFor(modelItem => item.Info.MiddleName[0])
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Info.PhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Info.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Specialty.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Balance)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.ID">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

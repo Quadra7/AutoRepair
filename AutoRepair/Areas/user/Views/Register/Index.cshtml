@@ -1,0 +1,71 @@
+﻿@model AutoRepair.Areas.user.Models.RegisterClientModel
+
+@{
+    ViewData["Title"] = "Sing Up";
+}
+<main class="form-signin w-100 m-auto">
+    <h1 class="h3 mb-3 fw-normal">Sign Up</h1>
+    <hr />
+    <form asp-action="Index">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <!-- Last Name -->
+        <div class="form-floating">
+            <input asp-for="LastName" type="name" class="form-control" id="floatingInput" placeholder="example: Ivanov" />
+            <label for="floatingInput">Last Name</label>
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+
+        <!-- First Name -->
+        <div class="form-floating">
+            <input asp-for="FirstName" type="name" class="form-control" id="floatingInput" placeholder="example: Ivan" />
+            <label for="floatingInput">First Name</label>
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+
+        <!-- Middle Name (if exists) -->
+        <div class="form-floating">
+            <input asp-for="MiddleName" type="name" class="form-control" id="floatingInput" placeholder="example: Ivanovich" />
+            <label for="floatingInput">Middle name</label>
+            <span asp-validation-for="MiddleName" class="text-danger"></span>
+        </div>
+
+        <!-- Email -->
+        <div class="form-floating">
+            <input asp-for="Email" type="email" class="form-control" id="floatingInput" placeholder="example: youraddress@@mail.ru" />
+            <label for="floatingInput">Email</label>
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <!-- Phone Number -->
+        <div class="form-floating">
+            <input asp-for="PhoneNumber" type="text" class="form-control" id="floatingInput" placeholder="example: 79999999999" />
+            <label for="floatingInput">Your phone number</label>
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        </div>
+
+        <!-- Address -->
+        <div class="form-floating">
+            <input asp-for="Address" type="text" class="form-control" id="floatingInput" placeholder="example: ul. SomeStreet, 1" />
+            <label for="floatingInput">Your Address</label>
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+
+        <!-- Password -->
+        <div class="form-floating">
+            <input asp-for="Password" type="password" class="form-control" id="floatingPassword" placeholder="example: qwerty" />
+            <label for="floatingPassword">Password</label>
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+
+        <hr />
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Sign Up!</button>
+        <a asp-area="" asp-controller="Home" asp-action="Index" type="button" class="btn btn-secondary btn-sm">Home</a>
+    </form>
+</main>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

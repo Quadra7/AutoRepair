@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "User already exists";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="text-center">
+                <h2>Oops!</h2>
+                <h4>User already existed with this email.</h4>
+                <h4>Please, choose another email.</h4>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-primary btn-lg">Home</a>
+                <a asp-area="user" asp-controller="Register" asp-action="Index" class="btn btn-primary btn-lg">Try again</a>
+            </div>
+        </div>
+    </div>
+</div>

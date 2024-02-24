@@ -1,0 +1,57 @@
+@font-face {
+    font-family: "Lato";
+    src: url("../fonts/Lato-Black.ttf");
+}
+
+html {
+    font-size: 16px;
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.home-button {
+    padding: 10px;
+    background-color: #fcb435;
+    border-radius: 10px;
+    transition: 0.5s;
+    &:hover
+    {
+        background-color: #ff8c00;
+    }
+}
+
+section {
+    padding: 80px 0;
+}
+
+.block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.main-info-title {
+    font-family: 'Lato';
+    font-size: 10px;
+    color: darkorange;
+}
+
+.main-info-description {
+    font-family: 'Lato';
+    word-spacing: 0.5em;
+}
+
+.main-image-block {
+    position: relative;
+}
+
+.main-image {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+}
